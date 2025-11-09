@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regie Flores - Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary-color: #6c63ff;
+            --secondary-color: #4a44b5;
+            --accent-color: #ff6584;
+            --light-bg: #f8f9fa;
+            --dark-text: #2d3748;
+            --light-text: #718096;
+        }
+        
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            color: var(--dark-text);
+            line-height: 1.7;
+            scroll-behavior: smooth;
+        }
+        
+        .profile-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        
+        .profile-img {
+            width: 180px;
+            height: 180px;
+            object-fit: cover;
+            border: 5px solid white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .name-title {
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+        
+        .info-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            border: none;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            width: 100%;
+        }
+        
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+        }
+        
+        .info-item {
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+        }
+        
+        .info-item:last-child {
+            border-bottom: none;
+        }
+        
+        .info-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(108, 99, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--primary-color);
+            border-radius: 3px;
+        }
+        
+        .accent-text {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(108, 99, 255, 0.1);
+            color: var(--primary-color);
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        .floating-shape {
+            position: fixed;
+            border-radius: 50%;
+            opacity: 0.05;
+            z-index: -1;
+        }
+        
+        .shape-1 {
+            width: 300px;
+            height: 300px;
+            background: var(--primary-color);
+            top: 10%;
+            right: 10%;
+        }
+        
+        .shape-2 {
+            width: 200px;
+            height: 200px;
+            background: var(--accent-color);
+            bottom: 10%;
+            left: 5%;
+        }
+        
+        .shape-3 {
+            width: 150px;
+            height: 150px;
+            background: var(--secondary-color);
+            top: 70%;
+            right: 20%;
+        }
+        
+        /* Enhanced Navigation with Blue Underline */
+        .navbar {
+            transition: all 0.3s ease;
+        }
+        
+        .nav-pills {
+            position: relative;
+        }
+        
+        .nav-pills .nav-link {
+            color: var(--dark-text);
+            border-radius: 0;
+            padding: 0.5rem 1.5rem;
+            margin: 0 0.25rem;
+            transition: all 0.3s ease;
+            position: relative;
+            background: transparent !important;
+        }
+        
+        .nav-pills .nav-link.active {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        .nav-pills .nav-link:hover:not(.active) {
+            color: var(--primary-color);
+        }
+        
+        /* Blue underline indicator */
+        .nav-indicator {
+            position: absolute;
+            bottom: 0;
+            height: 3px;
+            background: var(--primary-color);
+            border-radius: 3px 3px 0 0;
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+        
+        .skill-bar {
+            height: 8px;
+            border-radius: 4px;
+            background: rgba(108, 99, 255, 0.1);
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+        
+        .skill-progress {
+            height: 100%;
+            border-radius: 4px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            width: 0;
+            transition: width 1.5s ease;
+        }
+        
+        .project-card {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            height: 100%;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+            color: inherit;
+            text-decoration: none;
+        }
+        
+        .project-img {
+            height: 200px;
+            object-fit: cover;
+            width: 100%;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark-text);
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .project-img::after {
+            content: 'Click to view live website';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(108, 99, 255, 0.9);
+            color: white;
+            padding: 0.5rem;
+            text-align: center;
+            font-size: 0.8rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .project-card:hover .project-img::after {
+            transform: translateY(0);
+        }
+        
+        .project-tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: rgba(108, 99, 255, 0.1);
+            color: var(--primary-color);
+            border-radius: 30px;
+            font-size: 0.8rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .timeline:before {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: rgba(108, 99, 255, 0.2);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+        
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            left: -2rem;
+            top: 0.25rem;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--primary-color);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            border-radius: 30px;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(108, 99, 255, 0.3);
+        }
+        
+        .section-padding {
+            padding: 5rem 0;
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(108, 99, 255, 0.3);
+        }
+        
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(108, 99, 255, 0.4);
+        }
+        
+        .contact-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .contact-option {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .contact-option:hover {
+            background: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            color: inherit;
+            text-decoration: none;
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(108, 99, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+        
+        .cert-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(108, 99, 255, 0.1);
+            color: var(--primary-color);
+            border-radius: 30px;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .profile-img {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .name-title {
+                font-size: 2.5rem;
+            }
+            
+            .section-padding {
+                padding: 3rem 0;
+            }
+            
+            .nav-pills .nav-link {
+                padding: 0.5rem 1rem;
+                margin: 0.25rem 0;
+            }
+            
+            .nav-indicator {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Background Shapes -->
+    <div class="floating-shape shape-1"></div>
+    <div class="floating-shape shape-2"></div>
+    <div class="floating-shape shape-3"></div>
+    
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-transparent fixed-top py-3">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#" style="background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Regie Flores</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto nav-pills">
+                    <div class="nav-indicator"></div>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#skills">Skills</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#projects">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#experience">Experience</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Home Section -->
+    <section id="home" class="profile-container">
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-lg-10">
+                    <div class="row align-items-center">
+                        <!-- Profile Section -->
+                        <div class="col-md-5 text-center text-md-start mb-5 mb-md-0">
+                            <img src="images/profile.jpg" 
+                                 alt="Profile" class="profile-img rounded-circle mb-4">
+                            
+                            <h1 class="name-title display-4 fw-bold">Regie Flores</h1>
+                            <p class="text-muted mb-4">BSIT Student & Aspiring Developer</p>
+                            
+                            <div class="social-links mt-4">
+                                <a href="mailto:regie0534@gmail.com"><i class="bi bi-envelope"></i></a>
+                                <a href="https://www.linkedin.com/in/regie-flores/" target="_blank"><i class="bi bi-linkedin"></i></a>
+                                <a href="https://github.com/sykregie" target="_blank"><i class="bi bi-github"></i></a>
+                                <a href="https://www.facebook.com/regie.flores.31521" target="_blank"><i class="bi bi-facebook"></i></a>
+                            </div>
+                        </div>
+                        
+                        <!-- Information Section -->
+                        <div class="col-md-7">
+                            <h2 class="section-title">Personal Details</h2>
+                            
+                            <div class="info-card p-4">
+                                <div class="info-item">
+                                    <div class="info-icon">
+                                        <i class="bi bi-person"></i>
+                                    </div>
+                                    <div>
+                                        <span class="fw-bold">Full Name:</span>
+                                        <span class="ms-2">Regie B. Flores</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="info-item">
+                                    <div class="info-icon">
+                                        <i class="bi bi-calendar"></i>
+                                    </div>
+                                    <div>
+                                        <span class="fw-bold">Age:</span>
+                                        <span class="ms-2">21 Years Old</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="info-item">
+                                    <div class="info-icon">
+                                        <i class="bi bi-geo-alt"></i>
+                                    </div>
+                                    <div>
+                                        <span class="fw-bold">Address:</span>
+                                        <span class="ms-2">Caningay, Candoni, Negros Occidental</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="info-item">
+                                    <div class="info-icon">
+                                        <i class="bi bi-envelope"></i>
+                                    </div>
+                                    <div>
+                                        <span class="fw-bold">Email:</span>
+                                        <span class="ms-2">regie0534@gmail.com</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="info-item">
+                                    <div class="info-icon">
+                                        <i class="bi bi-phone"></i>
+                                    </div>
+                                    <div>
+                                        <span class="fw-bold">Phone:</span>
+                                        <span class="ms-2">+63 9273397284</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Brief Bio -->
+                            <div class="info-card p-4 mt-4">
+                                <h5 class="mb-3">About Me</h5>
+                                <p class="mb-0">A 3rd Year BSIT Student at Central Philippines State University with a passion for web development and creating innovative digital solutions.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section id="about" class="section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <h2 class="section-title">About Me</h2>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="info-card p-4 h-100">
+                                <h4 class="mb-3">My Journey</h4>
+                                <p>Motivated and detail-oriented IT student with a strong foundation in software development, networking, and system administration. Proficient in languages such as Java, Python, and SQL.</p>
+                                <p>Eager to apply technical skills and a passion for problem-solving to a challenging internship or entry-level role in software engineering or IT support.</p>
+                                
+                                <div class="mt-4">
+                                    <h5>Certifications (In Progress)</h5>
+                                    <div class="mt-2">
+                                        <span class="cert-badge">CompTIA A+</span>
+                                        <span class="cert-badge">Microsoft Azure Fundamentals</span>
+                                        <span class="cert-badge">Google IT Support</span>
+                                        <span class="cert-badge">Cisco CCNA</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mt-4 mt-md-0">
+                            <div class="info-card p-4 h-100">
+                                <h4 class="mb-3">Education</h4>
+                                <div class="timeline">
+                                    <div class="timeline-item">
+                                        <div class="timeline-dot"></div>
+                                        <h5>BS in Information Technology</h5>
+                                        <p class="text-muted">Central Philippines State University</p>
+                                        <p class="small text-muted">2021 - Present (3rd Year)</p>
+                                        <p class="small">Relevant coursework: Object-Oriented Programming, Data Structures, Computer Networks, Database Management, Web Development, Cybersecurity</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="mt-4">
+                                    <h5>Languages</h5>
+                                    <p>English (Intermediate)</p>
+                                </div>
+                                
+                                <div class="mt-4">
+                                    <h5>Additional Info</h5>
+                                    <p class="small">Provide pro-bono community IT support, informally renowned as the neighborhood "tech doctor" for troubleshooting and repairing hardware.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Skills Section -->
+    <section id="skills" class="section-padding bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <h2 class="section-title">Skills & Expertise</h2>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="info-card p-4 mb-4">
+                                <h4 class="mb-4">Technical Skills</h4>
+                                
+                                <div class="skill-item mb-4">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span>Software Development</span>
+                                        <span>85%</span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="85"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="skill-item mb-4">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span>Database Management</span>
+                                        <span>73%</span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="80"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="skill-item mb-4">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span>System Administration</span>
+                                        <span>69%</span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="75"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="skill-item mb-4">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span>IT Support & Troubleshooting</span>
+                                        <span>90%</span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="90"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="info-card p-4 mb-4">
+                                <h4 class="mb-4">Technologies & Tools</h4>
+                                
+                                <div class="mb-4">
+                                    <h6>Programming Languages</h6>
+                                    <p>Python, Java, JavaScript, PHP, SQL</p>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <h6>Web Development</h6>
+                                    <p>HTML, CSS, JavaScript, PHP, MySQL</p>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <h6>Systems & Platforms</h6>
+                                    <p>Linux, Windows, Virtualization</p>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <h6>Other Skills</h6>
+                                    <p>Network Configuration, Electronics Troubleshooting, Home Wiring Expertise</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+<!-- Projects Section -->
+<section id="projects" class="section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <h2 class="section-title">My Projects</h2>
+                <div class="row">
+                    <!-- Project 1 -->
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <a href="#" target="_blank" class="project-card">
+                            <div class="project-img">
+                                <img src="images/examsecure_pro.png" alt="ExamSecure Pro Screenshot" style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                            <div class="p-3">
+                                <h5>ExamSecure Pro</h5>
+                                <p class="text-muted small">Secure online exam system with AI proctoring, browser lockdown, and automated grading.</p>
+                                <p class="text-muted small">No direct link for github doesn't support backend.</p>
+                                <p class="text-muted small">Ongoing Development.</p>
+                                <div class="mt-3">
+                                    <span class="project-tag">HTML</span>
+                                    <span class="project-tag">CSS</span>
+                                    <span class="project-tag">JavaScript</span>
+                                    <span class="project-tag">PHP</span>
+                                    <span class="project-tag">MySQL</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Project 2 -->
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <a href="https://sykregie.github.io/CodeLive/" target="_blank" class="project-card">
+                            <div class="project-img">
+                                <img src="images/codelive.png" alt="CodeLive Screenshot" style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                            <div class="p-3">
+                                <h5>CodeLive</h5>
+                                <p class="text-muted small">Real-time online code editor with live preview, console output, and export tools.</p>
+                                <div class="mt-3">
+                                    <span class="project-tag">HTML</span>
+                                    <span class="project-tag">CSS</span>
+                                    <span class="project-tag">JavaScript</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Project 3 -->
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <a href="https://sykregie.github.io/Calculator_web/" target="_blank" class="project-card">
+                            <div class="project-img">
+                                <img src="images/calculator_web.png" alt="BHMS Screenshot" style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                            <div class="p-3">
+                                <h5>Web_Calculator</h5>
+                                <p class="text-muted small">For school porposes only.</p>
+                                <div class="mt-3">
+                                    <span class="project-tag">HTML</span>
+                                    <span class="project-tag">JavaScript</span>
+                                    <span class="project-tag">CSS</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Project 4 -->
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <a href="https://sykregie.github.io/CodeLabs/" target="_blank" class="project-card">
+                            <div class="project-img">
+                                <img src="images/codelabs.png" alt="CodeLabs Screenshot" style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                            <div class="p-3">
+                                <h5>CodeLabs</h5>
+                                <p class="text-muted small">Responsive platform offering structured programming tutorials with clean, intuitive UI.</p>
+                                <div class="mt-3">
+                                    <span class="project-tag">HTML</span>
+                                    <span class="project-tag">CSS</span>
+                                    <span class="project-tag">JavaScript</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Project 5 -->
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <a href="https://sykregie.github.io/Linux_Dojo/" target="_blank" class="project-card">
+                            <div class="project-img">
+                                <img src="images/linux_dojo.png" alt="LinuxDojo Screenshot" style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                            <div class="p-3">
+                                <h5>LinuxDojo</h5>
+                                <p class="text-muted small">Gamified Linux learning platform with XP system, progress tracking, and labs.</p>
+                                <p class="text-muted small">static site only' backend not included.</p>
+                                <div class="mt-3">
+                                    <span class="project-tag">HTML</span>
+                                    <span class="project-tag">CSS</span>
+                                    <span class="project-tag">JavaScript</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Project 6 -->
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <a href="#" target="_blank" class="project-card">
+                            <div class="project-img">
+                                <img src="images/cpsu_crud.png" alt="CRUD System Screenshot" style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                            <div class="p-3">
+                                <h5>Basic CRUD System</h5>
+                                <p class="text-muted small">Simple academic CRUD project following CPSU's web design style.</p>
+                                <p class="text-muted small">No direct link for github doesn't support backend.</p>
+                                <p class="text-muted small">For school porposes only.</p>
+                                <div class="mt-3">
+                                    <span class="project-tag">PHP</span>
+                                    <span class="project-tag">MySQL</span>
+                                    <span class="project-tag">HTML/CSS</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-4">
+                    <a href="https://github.com/sykregie" target="_blank" class="btn btn-primary">
+                        <i class="bi bi-github"></i> View More on GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    
+    <!-- Experience Section -->
+    <section id="experience" class="section-padding bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <h2 class="section-title">Experience</h2>
+                    <div class="info-card p-4">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-dot"></div>
+                                <h5>IT Hardware Technician</h5>
+                                <p class="text-muted">MF Computer Solution Kabankalan Branch</p>
+                                <p class="small text-muted">March 2023 – June 2023</p>
+                                <ul>
+                                    <li>Diagnosed, repaired, and maintained laptop hardware (screens, keyboards, batteries)</li>
+                                    <li>Provided technical customer service and translated complex problems into solutions</li>
+                                    <li>Managed full device setup including OS installation and software configuration</li>
+                                    <li>Balanced technical duties with sales and inventory management</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact" class="section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <h2 class="section-title">Get In Touch</h2>
+                    <div class="row">
+                        <div class="col-md-8 mx-auto">
+                            <div class="info-card p-4 text-center">
+                                <h4 class="mb-4">Contact Me</h4>
+                                <p class="mb-4">Feel free to reach out through any of these platforms. I'm always open to discussing new opportunities, projects, or just having a conversation about technology!</p>
+                                
+                                <div class="contact-options">
+                                    <a href="mailto:regie0534@gmail.com" class="contact-option">
+                                        <div class="contact-icon">
+                                            <i class="bi bi-envelope"></i>
+                                        </div>
+                                        <div class="text-start">
+                                            <h6 class="mb-1">Email Me</h6>
+                                            <p class="mb-0 text-muted">regie0534@gmail.com</p>
+                                        </div>
+                                    </a>
+                                    
+                                    <a href="https://www.linkedin.com/in/regie-flores/" target="_blank" class="contact-option">
+                                        <div class="contact-icon">
+                                            <i class="bi bi-linkedin"></i>
+                                        </div>
+                                        <div class="text-start">
+                                            <h6 class="mb-1">Connect on LinkedIn</h6>
+                                            <p class="mb-0 text-muted">View my professional profile</p>
+                                        </div>
+                                    </a>
+                                    
+                                    <a href="https://github.com/sykregie" target="_blank" class="contact-option">
+                                        <div class="contact-icon">
+                                            <i class="bi bi-github"></i>
+                                        </div>
+                                        <div class="text-start">
+                                            <h6 class="mb-1">Check My GitHub</h6>
+                                            <p class="mb-0 text-muted">See my projects and code</p>
+                                        </div>
+                                    </a>
+                                    
+                                    <a href="https://www.facebook.com/regie.flores.31521" target="_blank" class="contact-option">
+                                        <div class="contact-icon">
+                                            <i class="bi bi-facebook"></i>
+                                        </div>
+                                        <div class="text-start">
+                                            <h6 class="mb-1">Message on Facebook</h6>
+                                            <p class="mb-0 text-muted">Connect with me socially</p>
+                                        </div>
+                                    </a>
+                                </div>
+                                
+                                <div class="mt-4">
+                                    <p class="text-muted">I typically respond within 24 hours. Looking forward to connecting with you!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="py-4 bg-dark text-light text-center">
+        <div class="container">
+            <p class="mb-0">© 2023 Regie Flores. All Rights Reserved.</p>
+        </div>
+    </footer>
+    
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top">
+        <i class="bi bi-arrow-up"></i>
+    </a>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Navigation indicator functionality
+        function initNavIndicator() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const navIndicator = document.querySelector('.nav-indicator');
+            
+            // Set initial position for the indicator
+            const activeLink = document.querySelector('.nav-link.active');
+            if (activeLink) {
+                updateIndicator(activeLink, navIndicator);
+            }
+            
+            // Update indicator on click
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                    updateIndicator(this, navIndicator);
+                });
+            });
+            
+            // Update indicator on scroll
+            window.addEventListener('scroll', () => {
+                updateActiveNavLink();
+                const activeLink = document.querySelector('.nav-link.active');
+                if (activeLink) {
+                    updateIndicator(activeLink, navIndicator);
+                }
+            });
+        }
+        
+        function updateIndicator(activeLink, indicator) {
+            const linkRect = activeLink.getBoundingClientRect();
+            const navRect = activeLink.closest('.nav-pills').getBoundingClientRect();
+            
+            indicator.style.width = `${linkRect.width}px`;
+            indicator.style.left = `${linkRect.left - navRect.left}px`;
+        }
+        
+        // Animate skill bars when scrolled into view
+        function animateSkillBars() {
+            const skillBars = document.querySelectorAll('.skill-progress');
+            skillBars.forEach(bar => {
+                const rect = bar.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 100) {
+                    bar.style.width = bar.getAttribute('data-width') + '%';
+                }
+            });
+        }
+        
+        // Show/hide back to top button
+        function toggleBackToTop() {
+            const backToTop = document.querySelector('.back-to-top');
+            if (window.scrollY > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        }
+        
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Update active nav link on scroll
+        function updateActiveNavLink() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let currentSection = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${currentSection}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+        
+        // Fixed scroll-to-top functionality
+        document.querySelector('.back-to-top').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Event listeners
+        window.addEventListener('scroll', () => {
+            animateSkillBars();
+            toggleBackToTop();
+        });
+        
+        window.addEventListener('load', () => {
+            animateSkillBars();
+            toggleBackToTop();
+            initNavIndicator();
+        });
+    </script>
+</body>
+</html>
